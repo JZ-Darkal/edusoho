@@ -5,7 +5,7 @@ namespace AppBundle\Component\MediaParser\ItemParser;
 class FallbackItemParser extends AbstractItemParser
 {
     private $patterns = array(
-        'p1' => '/^https?:\/\/.+?[(\.mp4)|(\.swf)]/s',
+        'p1' => '/^https?:\/\/.+?[(\.mp4)|(\.swf)|(\.php)]/s',
     );
 
     public function parse($url)
@@ -18,6 +18,12 @@ class FallbackItemParser extends AbstractItemParser
         $item['title'] = '';
 
         $item['url'] = $url;
+        $item['name'] = '';
+        $item['source'] = 'iframe';
+
+        $item['files'] = array(
+            array('url' => $url, 'type' => 'mp4'),
+        );
 
         if (stripos($url, '.mp4') > 0) {
             $item['mp4_url'] = $url;

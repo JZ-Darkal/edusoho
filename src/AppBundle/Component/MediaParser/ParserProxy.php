@@ -8,7 +8,7 @@ class ParserProxy
 {
     public function parseItem($url)
     {
-        $parsers = array('YoukuVideo', 'QQVideo', 'NeteaseOpenCourse', 'TudouVideo');
+        $parsers = array('YoukuVideo', 'QQVideo', 'NeteaseOpenCourse','Fallback','Kyy');
 
         $kernel = ServiceKernel::instance();
         $extras = array();
@@ -34,6 +34,7 @@ class ParserProxy
 
         foreach ($parsers as $parserName) {
             $class = __NAMESPACE__."\\ItemParser\\{$parserName}ItemParser";
+
             $parser = new $class();
 
             if (!$parser->detect($url)) {
